@@ -21,6 +21,7 @@ function Navbar() {
           marginTop:30,
           marginLeft:30,
           fontFamily:'Courier New',
+          cursor:'pointer',
         },
         bg: {
             backgroundColor:"black",
