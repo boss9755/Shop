@@ -48,7 +48,16 @@ function ProductList() {
     const { search } = useLocation()
     const { category } = queryString.parse(search)
         useEffect(() => {
-        if (category) {
+          axios
+          .get(category ? `http://localhost:5000/products?category=${category}` : `http://localhost:5000/products`)
+          .then((res) => {
+              setProduct(res.data)
+          })
+          .catch((err) => {
+              console.log(err)
+          })
+        }, [category])
+        /*if (category) {
           axios
           .get(`http://localhost:5000/products?category=${category}`)
           .then((res) => {
@@ -68,7 +77,7 @@ function ProductList() {
               console.log(err)
           })
         }
-    }, [category])
+    }, [category])*/
     return (
         <div className={classes.bg}>
             <div className={classes.header}> Products </div>
