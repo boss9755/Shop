@@ -1,30 +1,17 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import { Link, useHistory, useLocation} from "react-router-dom";
 import './index.css'
 import { AppBar, Toolbar, Typography, makeStyles} from '@material-ui/core';
 import queryString from 'query-string'
 
 function Navbar() {
-    const [product, setProduct] = useState([]);
     const { search } = useLocation()
     const { category } = queryString.parse(search)
     const history = useHistory();
-    const filterProductsByCategory = () => {
+    const filterProductsByCategory = (category) => {
         history.push(`/products?category=${category}`)
     }
-    console.log(category);
-    useEffect(() => {
-        axios
-        .get(`http://localhost:5000/products?category=${category}`)
-        .then((res) => {
-            //console.log(res.data)
-            setProduct(res.data)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }, [category])
+    console.log(category)
     const useStyles = makeStyles((theme) => ({
         root: {
           flexGrow: 1,
@@ -33,6 +20,7 @@ function Navbar() {
           flexGrow: 1,
           marginTop:30,
           marginLeft:30,
+          fontFamily:'Courier New',
         },
         bg: {
             backgroundColor:"black",
@@ -47,32 +35,68 @@ function Navbar() {
                     <Typography variant="h6" className={classes.title}>
                         <Link className="a" to="/">Products</Link>
                     </Typography>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link className="a" to="">Headphone</Link>
+                    <Typography
+                        variant="h6"
+                        className={classes.title}
+                        onClick={() => filterProductsByCategory("Headphone")}
+                    >
+                        Headphone
                     </Typography>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link className="a" to="/">Watch</Link>
+                    <Typography
+                        variant="h6"
+                        className={classes.title}
+                        onClick={() => filterProductsByCategory("Watch")}
+                    >
+                        Watch
                     </Typography>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link className="a" to="/">Lotion</Link>
+                    <Typography
+                        variant="h6"
+                        className={classes.title}
+                        onClick={() => filterProductsByCategory("Lotion")}
+                    >
+                        Lotion
                     </Typography>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link className="a" to="/">Footwear</Link>
+                    <Typography
+                        variant="h6"
+                        className={classes.title}
+                        onClick={() => filterProductsByCategory("Footwear")}
+                    >
+                        Footwear
                     </Typography>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link className="a" to="/">Camera</Link>
+                    <Typography
+                        variant="h6"
+                        className={classes.title}
+                        onClick={() => filterProductsByCategory("Camera")}
+                    >
+                        Camera
                     </Typography>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link className="a" to="/">Nature</Link>
+                    <Typography
+                        variant="h6"
+                        className={classes.title}
+                        onClick={() => filterProductsByCategory("Nature")}
+                    >
+                        Nature
                     </Typography>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link className="a" to="/">Eyeglass</Link>
+                    <Typography
+                        variant="h6"
+                        className={classes.title}
+                        onClick={() => filterProductsByCategory("Eyeglass")}
+                    >
+                        Eyeglass
                     </Typography>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link className="a" to="/">Computer</Link>
+                    <Typography
+                        variant="h6"
+                        className={classes.title}
+                        onClick={() => filterProductsByCategory("Computer")}
+                    >
+                        Computer
                     </Typography>
-                    <Typography variant="h6" className={classes.title}>
-                        <Link className="a" to="/">Book</Link>
+                    <Typography
+                        variant="h6"
+                        className={classes.title}
+                        onClick={() => filterProductsByCategory("Book")}
+                    >
+                        Book
                     </Typography>
                 </Toolbar>
             </AppBar>

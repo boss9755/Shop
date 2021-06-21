@@ -1,7 +1,6 @@
 import { Switch, Route, Redirect} from 'react-router-dom'
 import ProductList from './allProduct';
 import ProductDetail from './detail';
-import Category from './category';
 
 function Routing() {
     return (

@@ -1,7 +1,8 @@
 import { useEffect, useState} from 'react';
 import React from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import queryString from 'query-string'
 import { 
   makeStyles,
   Grid, 
@@ -44,20 +45,33 @@ const useStyles = makeStyles((theme) => ({
 function ProductList() {
     const [product, setProduct] = useState([]);
     const classes = useStyles();
+    const { search } = useLocation()
+    const { category } = queryString.parse(search)
         useEffect(() => {
-        axios
-        .get(`http://localhost:5000/products`)
-        .then((res) => {
-            //console.log(res.data)
-            setProduct(res.data)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }, [])
+        if (category) {
+          axios
+          .get(`http://localhost:5000/products?category=${category}`)
+          .then((res) => {
+              setProduct(res.data)
+          })
+          .catch((err) => {
+              console.log(err)
+          })
+        }
+        else {
+          axios
+          .get(`http://localhost:5000/products`)
+          .then((res) => {
+              setProduct(res.data)
+          })
+          .catch((err) => {
+              console.log(err)
+          })
+        }
+    }, [category])
     return (
         <div className={classes.bg}>
-            <div className={classes.header}> All Products </div>
+            <div className={classes.header}> Products </div>
             {product.map((data,id) => (
                 <ProductDetail key={id} {...data}/>
             ))}
@@ -70,7 +84,6 @@ const ProductDetail = (props) => {
   const classes = useStyles();
   const {id,desc, image, name, price} = props;
   const navigateToDetails = () => history.push(`/products/${id}`) 
-  //console.log(props)
   return (
     <div className={classes.root}>
     <React.Fragment>

@@ -16,7 +16,6 @@ const ProductDetails = () => {
         axios
         .get(`http://localhost:5000/products/${id}`)
         .then((res) => {
-            //console.log(res.data)
             setProduct(res.data)
         })
         .catch((err) => {
@@ -57,7 +56,6 @@ const ProductDetails = () => {
                 Products Detail
             </div>
         <React.Fragment>
-            <br/>
             <br/>
             <Grid item xs={12}>
                 <Paper className={classes.paper}>
